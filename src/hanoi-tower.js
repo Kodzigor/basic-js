@@ -20,7 +20,8 @@ function calculateHanoi(disksNumber, turnsSpeed) {
   let moves = 2 ** disksNumber - 1;
   let turnsTime = Math.floor(moves / (turnsSpeed / 3600));
   // console.log([moves, turnsTime]);
-  return { turns: moves, seconds: turnsTime };
+  let res = { turns: moves, seconds: turnsTime };
+  return res;
 }
 
 module.exports = {
