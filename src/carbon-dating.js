@@ -18,8 +18,33 @@ const HALF_LIFE_PERIOD = 5730;
  *
  */
 function dateSample(sampleActivity) {
-  throw new NotImplementedError("Not implemented");
+  // throw new NotImplementedError("Not implemented");
   // remove line with error and write your code here
+
+  const MODERN_ACTIVITY = 15;
+  const HALF_LIFE_PERIOD = 5730;
+
+  if (typeof sampleActivity !== "string" || sampleActivity.trim() === "") {
+    return false;
+  }
+
+  // Parse the sample activity as a float
+  const sampleActivityFloat = parseFloat(sampleActivity);
+
+  // Check if the parsed sample activity is a valid number
+  if (
+    isNaN(sampleActivityFloat) ||
+    sampleActivityFloat <= 0 ||
+    sampleActivityFloat > MODERN_ACTIVITY
+  ) {
+    return false;
+  }
+
+  // Calculate the age of the sample using the formula
+  const k = 0.693 / HALF_LIFE_PERIOD;
+  const age = Math.ceil(Math.log(MODERN_ACTIVITY / sampleActivityFloat) / k);
+
+  return age;
 }
 
 module.exports = {
