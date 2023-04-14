@@ -58,7 +58,7 @@ function transform(arr) {
     }
     temp.push(arr[i]);
   }
-  let fin = temp.filter((el) => !target.includes(el));
+  let fin = temp.filter((el) => !target.includes(el) && el !== undefined);
   return fin;
 }
 
