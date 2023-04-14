@@ -13,48 +13,53 @@ const { NotImplementedError } = require("../extensions/index.js");
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  *
  */
-function transform(/*arr*/) {
-  throw new NotImplementedError("Not implemented");
+function transform(arr) {
+  // throw new NotImplementedError("Not implemented");
   // remove line with error and write your code here
+  if (
+    !Array.isArray(arr) ||
+    arr === undefined ||
+    arr === null ||
+    typeof arr === "number" ||
+    typeof arr === "boolean"
+  ) {
+    return `'arr' parameter must be an instance of the Array!`;
+  }
+  if (arr.length === 0) {
+    return [];
+  }
 
-  // if (arr.length === 0) {
-  //   return [];
-  // }
-  // if (!Array.isArray(arr)) {
-  //   return `'arr' parameter must be an instance of the Array!`;
-  // }
+  let target = [
+    "--double-next",
+    "--double-prev",
+    "--discard-prev",
+    "--discard-next",
+  ];
+  // console.log(arr.indexOf(target))
+  let temp = [];
 
-  // let target = ["--double-next", "--double-prev"];
-  // // console.log(arr.indexOf(target))
-  // let res = arr.map((el, i) => {
-  //   let fin = [];
-  //   if (target.includes(el)) {
-  //     if (el === "--double-next") {
-  //       fin.push(
-  //         arr
-  //           .slice(0, i)
-  //           .concat(arr[i + 1])
-  //           .concat(arr.slice(i + 1))
-  //       );
-  //       console.log(el);
-  //     } else if (el === "--double-prev") {
-  //       fin.push(arr.slice(0, i).concat(arr[i - 1]));
-  //       console.log(el);
-  //     }
-  //   } else {
-  //     return [];
-  //   }
-  //   return fin;
-  // });
-  // return res
-  //   .join("")
-  //   .split(",")
-  //   .filter((el) => {
-  //     if (isFinite(el)) {
-  //       return +el;
-  //     }
-  //   })
-  //   .map((el) => +el);
+  for (let i = 0; i < arr.length; i++) {
+    let prev = arr[i];
+    let next = arr[i + 1];
+    if (arr[i] === undefined) {
+      continue;
+    } else if (next === target[1]) {
+      next = prev;
+      temp.push(next);
+      // i++
+    } else if (prev === target[0]) {
+      temp.push(next);
+      continue;
+    } else if (next === target[2]) {
+      continue;
+    } else if (prev === target[3]) {
+      i++;
+      continue;
+    }
+    temp.push(arr[i]);
+  }
+  let fin = temp.filter((el) => !target.includes(el));
+  return fin;
 }
 
 module.exports = {
