@@ -16,14 +16,10 @@ const { NotImplementedError } = require("../extensions/index.js");
 function transform(arr) {
   // throw new NotImplementedError("Not implemented");
   // remove line with error and write your code here
-  if (
-    !Array.isArray(arr) ||
-    arr === undefined ||
-    arr === null ||
-    typeof arr === "number" ||
-    typeof arr === "boolean"
-  ) {
-    return `'arr' parameter must be an instance of the Array!`;
+  // if (
+
+  if (!Array.isArray(arr)) {
+    throw new Error("'arr' parameter must be an instance of the Array!");
   }
   if (arr.length === 0) {
     return [];

@@ -4,7 +4,7 @@ const { NotImplementedError } = require("../extensions/index.js");
  * Implement chainMaker object according to task description
  *
  */
-let i = 0;
+
 const chainMaker = {
   chain: [],
   getLength() {
